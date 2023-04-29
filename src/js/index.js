@@ -1,6 +1,6 @@
 let rockBtn = document.querySelector('.buttons #rock');
 let paperBtn = document.querySelector('.buttons #paper');
-let scrissorsBtn = document.querySelector('.buttons #scrissors');
+let scissorsBtn = document.querySelector('.buttons #scissors');
 let resetBtn = document.querySelector('#reset');
 let winner = document.querySelector('#winner');
 let log = document.querySelector('#logs')
@@ -17,7 +17,7 @@ const score = {
 
 //get the computer choice
 function getComputerChoice() {
-    let available = ["rock", "paper", "scrissors"];
+    let available = ["rock", "paper", "scissors"];
     return available[Math.floor(Math.random() * available.length)];
 }
 
@@ -29,9 +29,9 @@ function playRound(playerSelection, computerSelection){
     } else if (playerSelection == "rock"){
         status = (computerSelection == "paper") ? "You lose, Paper beats Rock!" : "You win!";
     } else if (playerSelection == "paper"){
-        status = (computerSelection == "scrissors") ? "You lose, Scrissors beats Paper!" : "You win!";
-    } else if (playerSelection == "scrissors"){
-        status = (computerSelection == "rock") ? "You lose, Rock beats Scrissors!" : "You win!";
+        status = (computerSelection == "scissors") ? "You lose, Scissors beats Paper!" : "You win!";
+    } else if (playerSelection == "scissors"){
+        status = (computerSelection == "rock") ? "You lose, Rock beats Scissors!" : "You win!";
     } else {
         status = "error";
     }
@@ -83,8 +83,8 @@ paperBtn.addEventListener('click', () => {
     playGame("paper");
 });
 
-scrissorsBtn.addEventListener('click', () => {
-    playGame("scrissors");
+scissorsBtn.addEventListener('click', () => {
+    playGame("scissors");
 });
 
 resetBtn.addEventListener('click', () => {
