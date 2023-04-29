@@ -1,32 +1,92 @@
+let rockBtn = document.querySelector('.buttons #rock');
+let paperBtn = document.querySelector('.buttons #paper');
+let scrissorsBtn = document.querySelector('.buttons #scrissors');
+let resetBtn = document.querySelector('#reset');
+let winner = document.querySelector('#winner');
+let log = document.querySelector('#logs')
+let pScore = document.querySelector('#pScore');
+let cScore = document.querySelector('#cScore');
+let data = document.querySelector('.results');
+
+const score = {
+        playerScore: 0,
+        computerScore: 0,
+        gameLimit: 5,
+        winner: ""
+}
+
 //get the computer choice
 function getComputerChoice() {
     let available = ["rock", "paper", "scrissors"];
     return available[Math.floor(Math.random() * available.length)];
 }
+
 //function choosing the winner
 function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
     let status;
-    if(computerSelection == playerSelection) {
+    if(playerSelection == computerSelection) {
         status = "It's Draw!";
-    } else if (computerSelection == "rock"){
-        status = (playerSelection == "scrissors") ? "You lose, Rock beats Scrissors!" : "You win!";
-    } else if (computerSelection == "paper"){
-        status = (playerSelection == "rock") ? "You lose, Paper beats Rock!" : "You win!";
-    } else if (computerSelection == "scrissors"){
-        status = (playerSelection == "paper") ? "You lose, Scrissors beats Paper!" : "You win!";
+    } else if (playerSelection == "rock"){
+        status = (computerSelection == "paper") ? "You lose, Paper beats Rock!" : "You win!";
+    } else if (playerSelection == "paper"){
+        status = (computerSelection == "scrissors") ? "You lose, Scrissors beats Paper!" : "You win!";
+    } else if (playerSelection == "scrissors"){
+        status = (computerSelection == "rock") ? "You lose, Rock beats Scrissors!" : "You win!";
     } else {
         status = "error";
     }
     return status;
 }
 
-function game(){
-    for(let i = 1; i<=5; i++){
-        const playerSelection = prompt("Rock, Paper or Scrissors?");
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+//playGame function, accepts only playerSelection parameter
+function playGame(playerSelection) {
+    if((score.playerScore < score.gameLimit && score.computerScore < score.gameLimit)){
+        const computerSelection = getComputerChoice(); //generate computer choice
+        const result = playRound(playerSelection, computerSelection);    
+        if(result == "You win!"){
+            pScore.textContent = ++score.playerScore;
+            log.textContent = result;
+        } else if(result == "It's Draw!") {
+            log.textContent = result;
+        } else {
+            cScore.textContent = ++score.computerScore;
+            log.textContent = result;
+        }
+        if(score.playerScore == 5 || score.computerScore == 5){
+            score.winner = (score.playerScore > score.computerScore) ? "Well done, you beat the computer!" : "Computer Wins!";
+            if(score.playerScore == score.computerScore){
+                score.winner = "Draw!";
+            }
+            winner.textContent = score.winner;
+        }
+    } else {
+        winner.textContent = "Click the New Game button to start a new game!";
     }
 }
-game();
+
+function reset(){
+    score.playerScore = 0;
+    score.computerScore = 0;
+    score.winner = "";
+    winner.textContent = "Choose your weapon";
+    logs.textContent = "Match information will be displayed here.";
+    pScore.textContent = 0;
+    cScore.textContent = 0;
+}
+
+
+rockBtn.addEventListener('click', () => {
+    playGame("rock");
+});
+
+paperBtn.addEventListener('click', () => {
+    playGame("paper");
+});
+
+scrissorsBtn.addEventListener('click', () => {
+    playGame("scrissors");
+});
+
+resetBtn.addEventListener('click', () => {
+    reset();
+})

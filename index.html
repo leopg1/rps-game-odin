@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="/rps-game-odin/src/js/index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/rps-game-odin/src/css/style.css">
+    <title>Rock Paper Scrissors - Game</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <div class="container">
+        <h1>Rock, Paper & Scrissors</h1>
+        <p id="winner">Choose your weapon!</p>
+        <div class="buttons">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scrissors">Scrissors</button>  
+        </div>
+        <div class="results">
+            <p id="score"><span id="pScore">0</span> vs <span id="cScore">0</span></p>
+            <p id="logs">Match information will be displayed here.</p>
+        </div>
+        <button id="reset">New Game</button>
+    </div>              
+    <script src="/rps-game-odin/src/js/index.js"></script>
 </body>
 </html>
